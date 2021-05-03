@@ -12,7 +12,7 @@ app.use(express.static('templates'));
 
 //Api
 app.use(apiPath + 'user', require('./routes/user.route'));
-
+app.use(apiPath + 'signup',require('./routes/signup.route'));
 
 
 
