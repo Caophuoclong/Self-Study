@@ -1,23 +1,45 @@
-const http = require("http");
-const fs = require("fs");
-const host = 'localhost';
-const port = 8000;
+const express = require('express');
+const fs = require('fs');
+const mongo = require('mongodb');
 
-const server = http.createServer((req,res)=>{
-    res.writeHead(200,{"Content-Type": "text/html"});
-    console.log("Server is working");
-    fs.readFile("./templates/index.html", (err,data)=>{ // open file html
-        if (err) {
-            console.log("Error open file: " + err);
-        }
-        console.log('Operation successful');
-        res.end(data);
+
+const url = "mongodb://localhost:27017/";
+const db_name = "test";
+app = express();
+const port = 8080;
+let data = [
+        {name:"PhuocThanh", age:"12",mobile:"0326031442"},
+        {name: "Khanh Van", age: "18",mobile:"0973906464"},
+        {name: "Man", age: "20", mobile:"PhuocLong"}
+
+    ];
+mongo.connect(url,(err, client)=>{ // connect database 
+    if (err) throw err;
+    console.log("Connect database successfully!");
+    const db = client.db(db_name); // connect into database name
+    db.collection("Summer").insertMany(data,(error, collection)=>{ // connect collection name and add data;
+        if (error) throw error;
+        console.log("Insert data successfully!");
+        console.log(collection);
     })
+})
+
+
+app.get('/', (req, res) => {
+    res.send("xinchao");
 });
 
-server.listen(port,host,(error)=>{
-    if (error) {
-        console.log("Error occurred: "+error);
-    }
-    console.log("Server is running on "+host+':'+port);
-});
+app.get('/signin', (req, res) => {
+    let user = req.query.user;
+    let password = req.query.password;
+    console.log("Username: " + user + "\nPassword: " + password);
+    if (user === "caophuoclong")
+        res.send("This is demo of signup page");
+    else
+        res.send("Login failed");
+
+})
+
+app.listen(port, () => {
+    console.log('App is running on ' + port);
+})
