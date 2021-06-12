@@ -39,8 +39,22 @@ function delete1(){
     });
 });
 };
-delete1();
 
+function find(){
+    mongo.connect(url,(err, client)=>{ // connect database 
+    if (err) throw err;
+    console.log("Connect database successfully!");
+    let query = {name: "PhuocThanh"};
+    const db = client.db(db_name); // connect into database name
+    db.collection("Summer").find({}).toArray((error, collection)=>{ // connect collection name and add data;
+        if (error) throw error;
+        console.log("Delete data successfully!");
+        console.log(collection.sort());
+    });
+});
+
+}
+find();
 
 app.get('/', (req, res) => {
     res.send("xinchao");
