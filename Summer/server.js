@@ -13,6 +13,7 @@ let data = [
         {name: "Man", age: "20", mobile:"PhuocLong"}
 
     ];
+function insert(){
 mongo.connect(url,(err, client)=>{ // connect database 
     if (err) throw err;
     console.log("Connect database successfully!");
@@ -23,6 +24,22 @@ mongo.connect(url,(err, client)=>{ // connect database
         console.log(collection);
     })
 })
+};
+
+function delete1(){
+    mongo.connect(url,(err, client)=>{ // connect database 
+    if (err) throw err;
+    console.log("Connect database successfully!");
+    let query = {name: "PhuocThanh"};
+    const db = client.db(db_name); // connect into database name
+    db.collection("Summer").deleteOne(query,(error, collection)=>{ // connect collection name and add data;
+        if (error) throw error;
+        console.log("Delete data successfully!");
+        console.log(collection);
+    });
+});
+};
+delete1();
 
 
 app.get('/', (req, res) => {
