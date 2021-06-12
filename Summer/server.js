@@ -46,15 +46,34 @@ function find(){
     console.log("Connect database successfully!");
     let query = {name: "PhuocThanh"};
     const db = client.db(db_name); // connect into database name
-    db.collection("Summer").find({}).toArray((error, collection)=>{ // connect collection name and add data;
+    db.collection("Summer").findOne({},(error, collection)=>{ // find data one or many, if many use function toArray
+        // else db.collection("Summer").find({},(error, collection))
         if (error) throw error;
         console.log("Delete data successfully!");
-        console.log(collection.sort());
+        console.log(collection);
     });
 });
 
 }
-find();
+
+function update(){
+    mongo.connect(url,(err, client)=>{ // connect database 
+    if (err) throw err;
+    console.log("Connect database successfully!");
+    let query = {name: "PhuocThanh"};
+    let data =  {name: "Khanh Van", age: "18",mobile:"0973906464"};
+    const db = client.db(db_name); // connect into database name
+    db.collection("Summer").updateOne({name: "Khanh Van"},{$set:{
+        name: "Phuoc Long"
+    }},(error, collection)=>{ // connect collection name and add data;
+        if (error) throw error;
+        console.log("Delete data successfully!");
+        console.log(collection);
+    });
+});
+
+}
+
 
 app.get('/', (req, res) => {
     res.send("xinchao");
