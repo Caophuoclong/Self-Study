@@ -1,0 +1,24 @@
+{
+  "name": "type-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Caophuoclong/Self-Study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Caophuoclong/Self-Study/issues"
+  },
+  "homepage": "https://github.com/Caophuoclong/Self-Study#readme",
+  "dependencies": {
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.6.0"
+  }
+}
